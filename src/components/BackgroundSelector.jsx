@@ -14,7 +14,7 @@ const allBackgrounds = Object.entries(backgroundModules)
 
     return {
       src, 
-      originalPath: `/backgrounds/${category}/${filename}.png`, 
+      originalPath: `../assets/backgrounds/${category}/${filename}.png`, 
       category,
       name: filename,
     };
