@@ -1,0 +1,55 @@
+.sticker-panel-wrapper {
+    text-align: center;
+    margin: 1rem 0;
+    display: grid;
+  }
+  
+  .category-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .category-buttons button {
+    padding: 0.4rem 0.8rem;
+    border-radius: 10px;
+    border: 1.5px solid #deb887;
+    background: #fff8f2;
+    cursor: pointer;
+  }
+  
+  .category-buttons .active {
+    background: #deb887;
+    color: #590d0d;
+  }
+  
+  .sticker-panel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: #fff4e9;
+    padding: 12px;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-items: center;
+    margin-top: 0.5rem;
+  }
+  
+  .sticker-thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .pagination {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+  

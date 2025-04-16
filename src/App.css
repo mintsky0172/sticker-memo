@@ -1,0 +1,76 @@
+/* 전체 컨테이너 너비 고정 및 가운데 정렬 */
+.app-container {
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 1rem;
+  font-family: 'SiruFont', sans-serif;
+  text-align: center;
+}
+
+.logo {
+  width: 240px;
+  height: auto;
+  margin: 0 auto 1rem;
+  display: block;
+}
+
+/* 공통 스타일 */
+.category-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 0.5rem;
+}
+
+/* 스티커, 배경 썸네일 컨테이너 고정 */
+.sticker-panel,
+.background-panel {
+  display: grid;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 1rem 0;
+  background: #fff4e9;
+  border-radius: 10px;
+  min-height: 90px;
+}
+
+/* 썸네일 크기 통일 */
+.sticker-thumb,
+.background-thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.sticker-thumb:hover,
+.background-thumb:hover {
+  transform: scale(1.1);
+}
+
+/* 페이지네이션 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0.5rem;
+}
+
+.pagination button {
+  background-color: #fff4e9;
+  border: 1px solid #c8a27e;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.pagination span {
+  font-size: 14px;
+  color: #8c5c3b;
+}
