@@ -55,7 +55,7 @@ export default function BackgroundSelector({ onSelectBackground }) {
 
   const handleSelect = (background) => {
     setSelectedSrc(background.src);
-    onSelectBackground(background.src);
+    onSelectBackground(background.originalPath);
   };
 
   useEffect(() => {
