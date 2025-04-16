@@ -41,20 +41,27 @@ export default function HandleCloudSave({ backgroundImage, onSaveComplete }) {
     const saved = JSON.parse(localStorage.getItem("stickers") || "{}");
     const stickers = Array.isArray(saved) ? saved : saved.stickers || [];
 
-    const cleanedBackground = backgroundImage
-    .replace(/^\/?public/, "") 
-    .replace(/^\/?assets/, "/backgrounds");
-    console.log("💾 실제 저장될 배경:", cleanedBackground);
+    let cleanedBackground = backgroundImage;
+
+    if (cleanedBackground.startsWith("/public")) {
+      cleanedBackground = cleanedBackground.replace("/public", "");
+    }
+
+    if (!cleanedBackground.startsWith("/backgrounds")) {
+      cleanedBackground = `/backgrounds${cleanedBackground}`;
+    }
+
+    console.log("📁 실제 저장될 배경:", cleanedBackground);
 
     const state = {
       backgroundImage: cleanedBackground,
       stickers,
     };
 
-
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     const user_id = user?.id;
-    
 
     const result = await saveMemo({ imageUrl, state, user_id });
 
