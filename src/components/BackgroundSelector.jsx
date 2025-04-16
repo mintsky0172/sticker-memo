@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./BackgroundSelector.css";
 
-const backgroundModules = import.meta.glob("/public/backgrounds/*/*.png", {
+const backgroundModules = import.meta.glob("/backgrounds/*/*.png", {
   eager: true,
   as: "url",
 });
