@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./BackgroundSelector.css";
 
-const backgroundModules = import.meta.glob("../assets/backgrounds/*/*.png", {
+const backgroundModules = import.meta.glob("/public/backgrounds/*/*.png", {
   eager: true,
   as: "url",
 });
@@ -14,7 +14,7 @@ const allBackgrounds = Object.entries(backgroundModules)
 
     return {
       src, 
-      originalPath: `../assets/backgrounds/${category}/${filename}.png`, 
+      originalPath: `/backgrounds/${category}/${filename}.png`, 
       category,
       name: filename,
     };

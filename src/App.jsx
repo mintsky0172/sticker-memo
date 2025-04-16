@@ -14,7 +14,7 @@ import "./App.css";
 
 export default function App() {
   const [selectedSticker, setSelectedSticker] = useState(null);
-  const [backgroundImage, setBackgroundImage] = useState("../assets/backgrounds/기본/grid18.png");
+  const [backgroundImage, setBackgroundImage] = useState("/backgrounds/기본/grid18.png");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loadedState, setLoadedState] = useState(null);
   const [imageList, setImageList] = useState([]);
@@ -47,7 +47,7 @@ export default function App() {
   ?.replace("/public", ""); 
   
     setLoadedState({
-      backgroundImage: cleanedBackground || "../assets/backgrounds/basic/grid18.png",
+      backgroundImage: cleanedBackground || "/backgrounds/basic/grid18.png",
       stickers: savedState.stickers || [],
     });
   };
