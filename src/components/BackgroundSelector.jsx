@@ -6,17 +6,21 @@ const backgroundModules = import.meta.glob("/public/backgrounds/*/*.png", {
   as: "url",
 });
 
-const allBackgrounds = Object.entries(backgroundModules).map(([path, src]) => {
-  const match = path.match(/\/backgrounds\/([^/]+)\/([^/]+)\.png$/);
-  if (!match) return null;
+const allBackgrounds = Object.entries(backgroundModules)
+  .map(([path, src]) => {
+    const match = path.match(/\/backgrounds\/([^/]+)\/([^/]+)\.png$/);
+    if (!match) return null;
 
-  const [, category, filename] = match;
-  return {
-    src,
-    category,
-    name: filename,
-  };
-}).filter(Boolean);
+    const [, category, filename] = match;
+
+    return {
+      src,
+      category,
+      name: filename,
+      originalPath: `/backgrounds/${category}/${filename}.png`,
+    };
+  })
+  .filter(Boolean);
 
 const categories = ["기본", "체크", "데코", "풍경"];
 const ITEMS_PER_PAGE = 8;
@@ -26,17 +30,22 @@ export default function BackgroundSelector({ onSelectBackground }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedSrc, setSelectedSrc] = useState(null);
 
-  const filtered = allBackgrounds.filter((bg) => bg.category === selectedCategory);
-  const paged = filtered.slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE);
+  const filtered = allBackgrounds.filter(
+    (bg) => bg.category === selectedCategory
+  );
+  const paged = filtered.slice(
+    currentPage * ITEMS_PER_PAGE,
+    (currentPage + 1) * ITEMS_PER_PAGE
+  );
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
 
-  const handleSelect = (src) => {
-    setSelectedSrc(src);
-    onSelectBackground(src);
+  const handleSelect = (bg) => {
+    setSelectedSrc(bg.src);
+    onSelectBackground(bg.originalPath);
   };
 
   useEffect(() => {
-    setCurrentPage(0); 
+    setCurrentPage(0);
   }, [selectedCategory]);
 
   return (
@@ -59,8 +68,10 @@ export default function BackgroundSelector({ onSelectBackground }) {
           <img
             key={idx}
             src={bg.src}
-            className={`background-thumb ${bg.src === selectedSrc ? "selected" : ""}`}
-            onClick={() => handleSelect(bg.src)}
+            className={`background-thumb ${
+              bg.src === selectedSrc ? "selected" : ""
+            }`}
+            onClick={() => handleSelect(bg)} // ❗ 객체 통째로 넘김
             alt={bg.name}
           />
         ))}
@@ -68,9 +79,23 @@ export default function BackgroundSelector({ onSelectBackground }) {
 
       {totalPages > 1 && (
         <div className="pagination">
-          <button onClick={() => setCurrentPage((p) => Math.max(p - 1, 0))} disabled={currentPage === 0}>◀</button>
-          <span>{currentPage + 1} / {totalPages}</span>
-          <button onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages - 1))} disabled={currentPage === totalPages - 1}>▶</button>
+          <button
+            onClick={() => setCurrentPage((p) => Math.max(p - 1, 0))}
+            disabled={currentPage === 0}
+          >
+            ◀
+          </button>
+          <span>
+            {currentPage + 1} / {totalPages}
+          </span>
+          <button
+            onClick={() =>
+              setCurrentPage((p) => Math.min(p + 1, totalPages - 1))
+            }
+            disabled={currentPage === totalPages - 1}
+          >
+            ▶
+          </button>
         </div>
       )}
     </div>
