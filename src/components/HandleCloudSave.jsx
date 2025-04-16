@@ -1,7 +1,7 @@
 import { supabase } from "../supabaseClient";
 import { saveMemo } from "../utils/uploadToSupabase";
 import html2canvas from "html2canvas";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function HandleCloudSave({ backgroundImage, onSaveComplete }) {
@@ -54,7 +54,7 @@ export default function HandleCloudSave({ backgroundImage, onSaveComplete }) {
     console.log("📁 실제 저장될 배경:", cleanedBackground);
 
     const state = {
-      backgroundImage: cleanedBackground,
+      backgroundImage,
       stickers,
     };
 
