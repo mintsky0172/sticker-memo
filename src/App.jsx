@@ -64,6 +64,11 @@ export default function App() {
   
     if (error) throw error;
     setImageList(data);
+
+    if (!Array.isArray(data)) {
+      toast.error("❌ 불러온 다꾸 리스트가 비어 있어요!");
+      return [];
+    }
   };
   
 

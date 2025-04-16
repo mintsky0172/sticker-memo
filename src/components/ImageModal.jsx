@@ -55,7 +55,7 @@ const ImageModal = ({
           padding: "12px",
         }}
       >
-        {displayList.map((item) => (
+        {Array.isArray(displayList) && displayList.map((item) => (
           <div key={item.id} style={{ textAlign: "center" }}>
             <img
               src={item.image_url}
