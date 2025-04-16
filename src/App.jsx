@@ -54,19 +54,28 @@ export default function App() {
   };
 
   const fetchImageList = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
+    try {
+      const {
+        data: { user },
+        error: userError
+      } = await supabase.auth.getUser();
   
-    const { data, error } = await supabase
-      .from("memos")
-      .select("*")
-      .eq("user_id", user.id)
-      .order("created_at", { ascending: false });
+      if (userError || !user) {
+        throw new Error("사용자 정보를 불러올 수 없어요!");
+      }
   
-    if (error) throw error;
-    setImageList(data);
-
-    if (!Array.isArray(data)) {
-      toast.error("❌ 불러온 다꾸 리스트가 비어 있어요!");
+      const { data, error } = await supabase
+        .from("memos")
+        .select("*")
+        .eq("user_id", user.id); 
+  
+      if (error) throw error;
+  
+      setImageList(data);
+      return data;
+    } catch (err) {
+      console.error("❌ 불러오기 오류:", err);
+      toast.error("❌ 저장된 다꾸를 불러오지 못했어요");
       return [];
     }
   };
