@@ -2,7 +2,7 @@
     width: 360px;
     height: 600px;
     position: relative;
-    background-image: url("/bg-grid.png");
+    background-image: url("../assets/backgrounds/basic/grid18.png");
     background-size: cover;
     border-radius: 16px;
     margin: 0 auto;
