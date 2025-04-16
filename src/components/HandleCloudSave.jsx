@@ -42,13 +42,13 @@ export default function HandleCloudSave({ backgroundImage, onSaveComplete }) {
     const stickers = Array.isArray(saved) ? saved : saved.stickers || [];
 
     const cleanedBackground = backgroundImage.replace(/^\/?public/, "");
-    
+    console.log("💾 실제 저장될 배경:", cleanedBackground);
+
     const state = {
       backgroundImage: cleanedBackground,
       stickers,
     };
 
-    console.log("💾 저장될 배경:", backgroundImage.replace("/public", ""));
 
     const { data: { user } } = await supabase.auth.getUser();
     const user_id = user?.id;
