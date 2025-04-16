@@ -44,7 +44,7 @@ export default function App() {
 
   const handleSelectMemo = (savedState) => {
     const cleanedBackground = savedState.backgroundImage
-      ?.replace(/^\/?public/, "");
+  ?.replace("/public", ""); 
   
     setLoadedState({
       backgroundImage: cleanedBackground || "/backgrounds/기본/grid18.png",
