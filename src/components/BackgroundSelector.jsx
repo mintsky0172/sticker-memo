@@ -10,14 +10,13 @@ const allBackgrounds = Object.entries(backgroundModules)
   .map(([path, src]) => {
     const match = path.match(/\/backgrounds\/([^/]+)\/([^/]+)\.png$/);
     if (!match) return null;
-
     const [, category, filename] = match;
 
     return {
-      src,
+      src, 
+      originalPath: `/backgrounds/${category}/${filename}.png`, 
       category,
       name: filename,
-      originalPath: `/backgrounds/${category}/${filename}.png`,
     };
   })
   .filter(Boolean);
@@ -45,7 +44,7 @@ export default function BackgroundSelector({ onSelectBackground }) {
   const filtered = allBackgrounds.filter(
     (bg) => bg.category === selectedKey
   );
-  
+
   const paged = filtered.slice(
     currentPage * ITEMS_PER_PAGE,
     (currentPage + 1) * ITEMS_PER_PAGE

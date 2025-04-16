@@ -47,7 +47,7 @@ export default function App() {
   ?.replace("/public", ""); 
   
     setLoadedState({
-      backgroundImage: cleanedBackground || "/backgrounds/기본/grid18.png",
+      backgroundImage: cleanedBackground || "/backgrounds/basic/grid18.png",
       stickers: savedState.stickers || [],
     });
   };

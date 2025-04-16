@@ -104,7 +104,7 @@ export default function MemoBoard({ selectedSticker, backgroundImage, loadedStat
         const parsed = JSON.parse(saved);
         const { backgroundImage, stickers } = parsed;
 
-        setBackgroundImage(backgroundImage || "/backgrounds/기본/grid18.png");
+        setBackgroundImage(backgroundImage || "/backgrounds/basic/grid18.png");
         setStickers(
           Array.isArray(stickers) ? stickers : stickers?.stickers || []
         );
