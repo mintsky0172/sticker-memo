@@ -42,16 +42,15 @@ export default function HandleCloudSave({ backgroundImage, onSaveComplete }) {
     const stickers = Array.isArray(saved) ? saved : saved.stickers || [];
 
     const cleanedBackground = backgroundImage.startsWith("/backgrounds")
-    ? backgroundImage
-    : `assets/backgrounds${backgroundImage}`;
-  
-  console.log("📁 실제 저장될 배경:", cleanedBackground);
-  
-  const state = {
-    backgroundImage: cleanedBackground,
-    stickers,
-  };
-  
+      ? backgroundImage
+      : `/backgrounds${backgroundImage}`;
+
+    console.log("📁 실제 저장될 배경:", cleanedBackground);
+
+    const state = {
+      backgroundImage: cleanedBackground,
+      stickers,
+    };
 
     const {
       data: { user },
