@@ -37,12 +37,14 @@ export default function BackgroundSelector({ onSelectBackground }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedSrc, setSelectedSrc] = useState(null);
 
+
+  
   const selectedKey = Object.keys(categoryMap).find(
     (key) => categoryMap[key] === selectedCategory
   );
 
   const filtered = allBackgrounds.filter(
-    (bg) => bg.category === selectedKey
+    (background) => background.category === selectedKey
   );
 
   const paged = filtered.slice(
@@ -51,9 +53,9 @@ export default function BackgroundSelector({ onSelectBackground }) {
   );
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
 
-  const handleSelect = (bg) => {
-    setSelectedSrc(bg.src);
-    onSelectBackground(bg.originalPath);
+  const handleSelect = (background) => {
+    setSelectedSrc(background.src);
+    onSelectBackground(background.originalPath);
   };
 
   useEffect(() => {
@@ -76,15 +78,15 @@ export default function BackgroundSelector({ onSelectBackground }) {
       </div>
 
       <div className="background-panel">
-        {paged.map((bg, idx) => (
+        {paged.map((background, idx) => (
           <img
             key={idx}
-            src={bg.src}
+            src={background.src}
             className={`background-thumb ${
-              bg.src === selectedSrc ? "selected" : ""
+              background.src === selectedSrc ? "selected" : ""
             }`}
-            onClick={() => handleSelect(bg)} // ❗ 객체 통째로 넘김
-            alt={bg.name}
+            onClick={() => handleSelect(background)} // ❗ 객체 통째로 넘김
+            alt={background.name}
           />
         ))}
       </div>
