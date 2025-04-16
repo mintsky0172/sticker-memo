@@ -22,7 +22,15 @@ const allBackgrounds = Object.entries(backgroundModules)
   })
   .filter(Boolean);
 
-const categories = ["기본", "체크", "데코", "풍경"];
+const categoryMap = {
+  basic: "기본",
+  check: "체크",
+  deco: "데코",
+  scenery: "풍경"
+};
+
+const categories = Object.values(categoryMap);
+
 const ITEMS_PER_PAGE = 8;
 
 export default function BackgroundSelector({ onSelectBackground }) {
@@ -30,9 +38,14 @@ export default function BackgroundSelector({ onSelectBackground }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedSrc, setSelectedSrc] = useState(null);
 
-  const filtered = allBackgrounds.filter(
-    (bg) => bg.category === selectedCategory
+  const selectedKey = Object.keys(categoryMap).find(
+    (key) => categoryMap[key] === selectedCategory
   );
+
+  const filtered = allBackgrounds.filter(
+    (bg) => bg.category === selectedKey
+  );
+  
   const paged = filtered.slice(
     currentPage * ITEMS_PER_PAGE,
     (currentPage + 1) * ITEMS_PER_PAGE
