@@ -54,7 +54,7 @@ export default function HandleCloudSave({ backgroundImage, onSaveComplete }) {
     console.log("📁 실제 저장될 배경:", cleanedBackground);
 
     const state = {
-      backgroundImage,
+      backgroundImage: backgroundImage,
       stickers,
     };
 
