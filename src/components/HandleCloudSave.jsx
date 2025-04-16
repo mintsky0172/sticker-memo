@@ -52,8 +52,9 @@ export default function HandleCloudSave({ backgroundImage, onSaveComplete }) {
 
     console.log("💾 저장될 배경:", backgroundImage.replace("/public", ""));
 
-    const user = supabase.auth.getUser();
+    const { data: { user } } = await supabase.auth.getUser();
     const user_id = user?.id;
+    
 
     const result = await saveMemo({ imageUrl, state, user_id });
 
