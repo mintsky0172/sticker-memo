@@ -7,6 +7,7 @@ import HandleCloudSave from "./components/HandleCloudSave";
 import ImageModal from "./components/ImageModal";
 import { toast, ToastContainer } from "react-toastify";
 import { supabase } from "./supabaseClient";
+import Login from "./components/Login";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -17,9 +18,32 @@ export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loadedState, setLoadedState] = useState(null);
   const [imageList, setImageList] = useState([]);
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session);
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => listener.subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (session) {
+      fetchImageList();  
+    }
+  }, [session]);
+
+  if (!session) {
+    return <Login />;
+  }
 
   const handleSelectMemo = (savedState) => {
-    console.log("✅ 처리할 state:", savedState);  // 여기 state 전체가 들어옴
+    console.log("✅ 처리할 state:", savedState);  
   
     const cleanedBackground = savedState.backgroundImage?.replace("/public", "");
   
@@ -28,31 +52,26 @@ export default function App() {
       stickers: savedState.stickers || [],
     });
   };
-  
-  
-  
-  
 
   const fetchImageList = async () => {
-    try {
-      const { data, error } = await supabase.from("memos").select("*");
-      if (error) throw error;
-      setImageList(data);
-      return data; 
-    } catch (err) {
-      console.error("❌ 불러오기 오류:", err);
-      toast.error("❌ 저장된 다꾸를 불러오지 못했어요");
-      return [];
-    }
+    const { data: { user } } = await supabase.auth.getUser();
+  
+    const { data, error } = await supabase
+      .from("memos")
+      .select("*")
+      .eq("user_id", user.id)
+      .order("created_at", { ascending: false });
+  
+    if (error) throw error;
+    setImageList(data);
   };
   
 
-  useEffect(() => {
-    fetchImageList();
-  }, []);
 
   return (
-    <div className="app-container">
+    <div>
+       <h2>🎉 로그인 성공!</h2>
+       <div className="app-container">
       <img src="/logo.png" alt="로고" className="logo" />
 
       <MemoBoard
@@ -90,5 +109,7 @@ export default function App() {
       </div>
       <ToastContainer position="top-center" autoClose={2000} />
     </div>
+    </div>
+   
   );
 }
