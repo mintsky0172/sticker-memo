@@ -47,13 +47,13 @@ export default function BackgroundSelector({ onSelectBackground }) {
       </div>
 
       <div className="background-panel">
-        {paged.map((bg, idx) => (
+        {paged.map((background, idx) => (
           <img
             key={idx}
-            src={bg.src}
-            className={`background-thumb ${bg.src === selectedSrc ? "selected" : ""}`}
-            onClick={() => handleSelect(bg.src)}
-            alt={bg.name}
+            src={background.src}
+            className={`background-thumb ${background.src === selectedSrc ? "selected" : ""}`}
+            onClick={() => handleSelect(background.src)}
+            alt={background.name}
           />
         ))}
       </div>
