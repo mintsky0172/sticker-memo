@@ -51,8 +51,13 @@ export default function BackgroundSelector({ onSelectBackground }) {
           <img
             key={idx}
             src={background.src}
-            className={`background-thumb ${background.src === selectedSrc ? "selected" : ""}`}
-            onClick={() => handleSelect(background.src)}
+            className={`background-thumb ${
+              background.src === selectedSrc ? "selected" : ""
+            }`}
+            onClick={() => {
+              console.log("👉 클릭된 background 객체:", background);
+              handleSelect(background);
+            }}
             alt={background.name}
           />
         ))}
@@ -70,7 +75,9 @@ export default function BackgroundSelector({ onSelectBackground }) {
             {currentPage + 1} / {totalPages}
           </span>
           <button
-            onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages - 1))}
+            onClick={() =>
+              setCurrentPage((p) => Math.min(p + 1, totalPages - 1))
+            }
             disabled={currentPage === totalPages - 1}
           >
             ▶
