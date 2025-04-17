@@ -39,7 +39,6 @@ export default function App() {
       setBackgroundImage(loadedState.backgroundImage);
     }
   }, [loadedState]);
-  
 
   useEffect(() => {
     if (session) {
@@ -105,7 +104,7 @@ export default function App() {
 
       <MemoBoard
         selectedSticker={selectedSticker}
-        backgroundImage={loadedState?.backgroundImage || backgroundImage}
+        backgroundImage={backgroundImage}
         loadedState={loadedState}
         setBackgroundImage={setBackgroundImage}
       />
