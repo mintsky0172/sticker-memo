@@ -6,6 +6,7 @@ export const saveMemo = async ({ imageUrl, state, user_id }) => {
       image_url: imageUrl,
       state: state,
       user_id: user_id,
+      created_at: new Date().toISOString(),
     },
   ]);
 

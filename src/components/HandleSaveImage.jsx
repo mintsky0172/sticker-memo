@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 export default function handleSaveImage() {
   const memo = document.getElementById('memo-board');
   if (!memo) {
-    alert("저장할 메모판이 없어요!");
+    toast.error("저장할 메모판이 없어요!");
     return;
   }
   html2canvas(memo).then((canvas) => {

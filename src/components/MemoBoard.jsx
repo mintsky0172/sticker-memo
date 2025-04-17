@@ -159,6 +159,7 @@ export default function MemoBoard({ selectedSticker, backgroundImage, loadedStat
     const startY = touch.clientY;
   
     const handleTouchMove = (moveEvent) => {
+      moveEvent.preventDefault();
       const dx = moveEvent.touches[0].clientX - startX;
       const dy = moveEvent.touches[0].clientY - startY;
       updateSticker(id, {
@@ -172,7 +173,7 @@ export default function MemoBoard({ selectedSticker, backgroundImage, loadedStat
       document.removeEventListener("touchend", handleTouchEnd);
     };
   
-    document.addEventListener("touchmove", handleTouchMove);
+    document.addEventListener("touchmove", handleTouchMove, {passive: false});
     document.addEventListener("touchend", handleTouchEnd);
   };
   
