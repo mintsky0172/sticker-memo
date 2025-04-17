@@ -185,7 +185,7 @@ export default function MemoBoard({ selectedSticker, backgroundImage, loadedStat
       style={{
         width: "360px",
         height: "600px",
-        backgroundImage: `url(${backgroundImage})`,
+        backgroundImage: `url(${backgroundImage.startsWith("/") ? backgroundImage : "/" + backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         borderRadius: "20px",
