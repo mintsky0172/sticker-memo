@@ -21,9 +21,10 @@ export default function BackgroundSelector({ onSelectBackground }) {
 
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
 
-  const handleSelect = (src) => {
-    setSelectedSrc(src);
-    onSelectBackground(src);
+  const handleSelect = (background) => {
+    setSelectedSrc(background.src);
+    onSelectBackground(background.originalPath);
+    console.log("선택된 배경 경로:", background.originalPath);
   };
 
   useEffect(() => {

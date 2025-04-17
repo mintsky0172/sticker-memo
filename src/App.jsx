@@ -50,6 +50,8 @@ export default function App() {
       backgroundImage: cleanedBackground || "/backgrounds/basic/grid18.png",
       stickers: savedState.stickers || [],
     });
+
+    console.log("적용될 배경: ", backgroundImage);
   };
 
   const fetchImageList = async () => {
