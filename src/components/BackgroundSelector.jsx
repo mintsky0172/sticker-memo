@@ -11,7 +11,7 @@ export default function BackgroundSelector({ onSelectBackground }) {
   const [selectedSrc, setSelectedSrc] = useState(null);
 
   const filtered = backgroundList.filter(
-    (bg) => bg.category === selectedCategory
+    (background) => background.category === selectedCategory
   );
 
   const paged = filtered.slice(
