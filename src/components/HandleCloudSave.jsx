@@ -41,7 +41,7 @@ export default function HandleCloudSave({ backgroundImage, onSaveComplete }) {
     const saved = JSON.parse(localStorage.getItem("stickers") || "{}");
     const stickers = Array.isArray(saved) ? saved : saved.stickers || [];
 
-    let cleanedBackground = backgroundImage;
+    let  cleanedBackground = backgroundImage.trim().replace(/^\/?public/, "");
     if (cleanedBackground.startsWith("/public")) {
       cleanedBackground = cleanedBackground.replace("/public", "");
     }

@@ -20,6 +20,8 @@ export default function App() {
   const [imageList, setImageList] = useState([]);
   const [session, setSession] = useState(null);
 
+  
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
@@ -33,6 +35,13 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (loadedState?.backgroundImage) {
+      setBackgroundImage(loadedState.backgroundImage);
+    }
+  }, [loadedState]);
+  
+
+  useEffect(() => {
     if (session) {
       fetchImageList();  
     }
@@ -42,6 +51,8 @@ export default function App() {
     return <Login />;
   }
 
+  
+  
   const handleSelectMemo = (savedState) => {
     const cleanedBackground = savedState.backgroundImage
   ?.replace("/public", ""); 
@@ -53,6 +64,8 @@ export default function App() {
 
     console.log("적용될 배경: ", backgroundImage);
   };
+
+  
 
   const fetchImageList = async () => {
     try {
@@ -81,6 +94,7 @@ export default function App() {
     }
   };
   
+  
 
 
   return (
@@ -91,7 +105,7 @@ export default function App() {
 
       <MemoBoard
         selectedSticker={selectedSticker}
-        backgroundImage={backgroundImage}
+        backgroundImage={loadedState?.backgroundImage || backgroundImage}
         loadedState={loadedState}
         setBackgroundImage={setBackgroundImage}
       />
