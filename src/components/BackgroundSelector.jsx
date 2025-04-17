@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import backgrounds from "./BackgroundList.jsx";
 import "./BackgroundSelector.css";
 
 const backgroundModules = import.meta.glob("/public/backgrounds/*/*.png", {
@@ -6,20 +7,7 @@ const backgroundModules = import.meta.glob("/public/backgrounds/*/*.png", {
   as: "url",
 });
 
-const allBackgrounds = Object.entries(backgroundModules)
-  .map(([path, src]) => {
-    const match = path.match(/\/backgrounds\/([^/]+)\/([^/]+)\.png$/);
-    if (!match) return null;
-    const [, category, filename] = match;
-
-    return {
-      src, 
-      originalPath: `/backgrounds/${category}/${filename}.png`, 
-      category,
-      name: filename,
-    };
-  })
-  .filter(Boolean);
+const allBackgrounds = backgrounds;
 
 const categoryMap = {
   basic: "기본",
