@@ -97,7 +97,7 @@ export default function App() {
       />
 
       <StickerPanel onSelectSticker={setSelectedSticker} />
-      <BackgroundSelector onSelectBackground={setBackgroundImage} />
+      <BackgroundSelector onSelectBackground={setBackgroundImage} currentBackground={backgroundImage} />
 
       <div className="save-button-wrapper">
         <button className="save-button" onClick={handleSaveImage}>

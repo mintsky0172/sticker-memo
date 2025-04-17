@@ -5,10 +5,14 @@ import backgroundList from "../data/backgroundList";
 const categories = ["기본", "체크", "데코", "풍경"];
 const ITEMS_PER_PAGE = 8;
 
-export default function BackgroundSelector({ onSelectBackground }) {
+export default function BackgroundSelector({ onSelectBackground , currentBackground }) {
   const [selectedCategory, setSelectedCategory] = useState("기본");
   const [currentPage, setCurrentPage] = useState(0);
-  const [selectedSrc, setSelectedSrc] = useState(null);
+  const [selectedSrc, setSelectedSrc] = useState(currentBackground);
+
+  useEffect(() => {
+    setSelectedSrc(currentBackground);
+  }, [currentBackground]);
 
   const filtered = backgroundList.filter(
     (background) => background.category === selectedCategory
