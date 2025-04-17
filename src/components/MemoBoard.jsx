@@ -185,7 +185,7 @@ export default function MemoBoard({ selectedSticker, backgroundImage, loadedStat
       style={{
         width: "360px",
         height: "600px",
-        backgroundImage: `url(${loadedState?.backgroundImage ?? backgroundImage})`,
+        backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         borderRadius: "20px",
@@ -304,3 +304,4 @@ export default function MemoBoard({ selectedSticker, backgroundImage, loadedStat
     </div>
   );
 }
+
